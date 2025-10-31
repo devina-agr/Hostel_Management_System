@@ -32,16 +32,16 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getAvailableRooms(hostelType, year));
     }
 
-    @PostMapping("/room-allotment")
-    public ResponseEntity<String> assignRoom(@RequestParam String roomId,@RequestParam String... studentIds){
-        boolean success=wardenService.allotRoom(roomId,List.of(studentIds));
-        if(success){
-            return ResponseEntity.ok("Room allotted successfully!");
-        }
-        else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Room allotment failed!");
-        }
-    }
+//    @PostMapping("/room-allotment")
+//    public ResponseEntity<String> assignRoom(@RequestParam String roomId,@RequestParam String... studentIds){
+//        boolean success=wardenService.allotRoom(roomId,List.of(studentIds));
+//        if(success){
+//            return ResponseEntity.ok("Room allotted successfully!");
+//        }
+//        else{
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Room allotment failed!");
+//        }
+//    }
 
     @PostMapping("/release")
     public ResponseEntity<String> releaseRoom(@PathVariable String roomId){

@@ -47,10 +47,10 @@ public class WardenController {
         StaffFullProfileDTO staffDTO=wardenService.addStaff(userPrincipal.getId(),staffRegisterDTO);
         return ResponseEntity.ok(staffDTO);
     }
-    @GetMapping("/compatibility-score")
-    public ResponseEntity<List<RoommateScoreDTO>> getRoommateScore(){
-        return ResponseEntity.ok(wardenService.getRoommateScore());
-    }
+//    @GetMapping("/compatibility-score")
+//    public ResponseEntity<List<RoommateScoreDTO>> getRoommateScore(){
+//        return ResponseEntity.ok(wardenService.getRoommateScore());
+//    }
 
     @GetMapping("/me")
     public ResponseEntity<WardenFullProfileDTO> getMyProfile(@AuthenticationPrincipal UserPrincipal userPrincipal){

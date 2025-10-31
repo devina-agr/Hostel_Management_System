@@ -15,10 +15,6 @@ public class AuthResponse {
         this.role = role;
     }
 
-    public AuthResponse(String token) {
-        this.token=token;
-    }
-
     public String getEmail() {
         return email;
     }

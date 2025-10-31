@@ -6,6 +6,10 @@ public class ComplaintDTO {
     private String description;
     private String roomId;
 
+    public String getRoomId() {
+        return roomId;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -26,6 +30,5 @@ public class ComplaintDTO {
         this.roomId = roomId;
     }
 
-    public String getRoomId() {
-    }
+
 }

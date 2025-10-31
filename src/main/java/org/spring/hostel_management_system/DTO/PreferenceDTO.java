@@ -10,7 +10,6 @@ public class PreferenceDTO {
     private Preference.NoisePreference noisePreference;
     private Preference.StudyPreference studyPreference;
     private Preference.Allergy allergy;
-    private Preference.Hobbies hobbies;
     private Preference.RoomTempPreference roomTempPreference;
     private RoomType roomType;
 
@@ -52,14 +51,6 @@ public class PreferenceDTO {
 
     public void setAllergy(Preference.Allergy allergy) {
         this.allergy = allergy;
-    }
-
-    public Preference.Hobbies getHobbies() {
-        return hobbies;
-    }
-
-    public void setHobbies(Preference.Hobbies hobbies) {
-        this.hobbies = hobbies;
     }
 
     public Preference.RoomTempPreference getRoomTempPreference() {

@@ -16,7 +16,6 @@ public class Preference {
     private NoisePreference noisePreference;
     private StudyPreference studyPreference;
     private Allergy allergy;
-    private Hobbies hobbies;
     private RoomTempPreference roomTempPreference;
     private RoomType roomType;
 
@@ -75,15 +74,6 @@ public class Preference {
     public void setAllergy(Allergy allergy) {
         this.allergy = allergy;
     }
-
-    public Hobbies getHobbies() {
-        return hobbies;
-    }
-
-    public void setHobbies(Hobbies hobbies) {
-        this.hobbies = hobbies;
-    }
-
     public RoomTempPreference getRoomTempPreference() {
         return roomTempPreference;
     }
@@ -125,15 +115,7 @@ public class Preference {
         PERFUME,
         OTHERS
     }
-    public enum Hobbies{
-        MUSIC,
-        CODING,
-        DANCE,
-        ART,
-        READING,
-        OUTDOOR_GAMES,
-        OTHERS
-    }
+
     public enum RoomTempPreference{
         CHILLED,
         COOL,

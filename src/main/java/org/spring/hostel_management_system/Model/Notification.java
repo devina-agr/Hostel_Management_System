@@ -2,8 +2,6 @@ package org.spring.hostel_management_system.Model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
-
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Component
@@ -15,6 +13,10 @@ public class Notification {
     private String title;
     private String description;
     private Date createdAt =new Date();
+
+
+    public Notification(){}
+
 
     public Notification(String id, String userId, String title, String description, Date createdAt) {
         this.id = id;

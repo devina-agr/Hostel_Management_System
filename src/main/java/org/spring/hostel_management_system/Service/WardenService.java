@@ -119,12 +119,12 @@ public class WardenService {
         }
     }
 
-    public List<RoommateScoreDTO> getRoommateScore() {
-    }
-
-    public boolean allotRoom(String roomId, List<String> studentIds) {
-        
-    }
+//    public List<RoommateScoreDTO> getRoommateScore() {
+//    }
+//
+//    public boolean allotRoom(String roomId, List<String> studentIds) {
+//
+//    }
 
     public WardenFullProfileDTO getMyProfile(String id) {
         User user=userRepo.findById(id).orElseThrow(()->new RuntimeException("No user found!"));

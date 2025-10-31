@@ -54,7 +54,6 @@ public class PreferenceService {
         preference.setAllergy(preferenceDTO.getAllergy());
         preference.setCleanlinessLevel(preferenceDTO.getCleanlinessLevel());
         preference.setScheduleType(preferenceDTO.getScheduleType());
-        preference.setHobbies(preferenceDTO.getHobbies());
         preference.setRoomType(preferenceDTO.getRoomType());
         preference.setStudentId(id);
         Preference savedPreference= preferenceRepo.save(preference);

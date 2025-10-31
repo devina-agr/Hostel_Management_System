@@ -39,7 +39,7 @@ public class AuthService {
             throw new RuntimeException("User not found!");
         }
         String token= jwtService.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponse(token);
+        return new AuthResponse(user.getEmail(),token,user.getRole());
     }
 
     public AuthResponse register(StudentRegisterRequest request) {
@@ -54,6 +54,6 @@ public class AuthService {
         student.setRole(Set.of(Role.STUDENT));
         userRepo.save(student);
         String token=jwtService.generateToken(student.getEmail(),student.getRole());
-        return new AuthResponse(token);
+        return new AuthResponse(student.getEmail(),token,student.getRole());
     }
 }
