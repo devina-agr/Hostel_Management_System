@@ -10,8 +10,17 @@ public class Complaint {
     private String id;
     private String roomId;
     private String studentId;
+    private String title;
     private String description;
     private Status status;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Complaint() {
         this.status = Status.PENDING;

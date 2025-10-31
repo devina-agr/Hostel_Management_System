@@ -2,10 +2,12 @@ package org.spring.hostel_management_system.DTO;
 
 import org.spring.hostel_management_system.Model.HostelType;
 
-public class WardenRegisterDTO {
+public class WardenProfileUpdateDTO {
+
     private String name;
     private String email;
     private String contactNo;
+    private String password;
     private HostelType hostelType;
 
     public HostelType getHostelType() {
@@ -38,5 +40,13 @@ public class WardenRegisterDTO {
 
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

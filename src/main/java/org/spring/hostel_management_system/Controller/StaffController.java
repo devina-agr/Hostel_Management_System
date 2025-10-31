@@ -18,13 +18,9 @@ import java.util.List;
 public class StaffController {
 
     private final StaffService staffService;
-    private final ComplaintService complaintService;
-    private final FeedbackService feedbackService;
 
-    public StaffController(StaffService staffService, ComplaintService complaintService, FeedbackService feedbackService) {
+    public StaffController(StaffService staffService) {
         this.staffService = staffService;
-        this.complaintService=complaintService;
-        this.feedbackService=feedbackService;
     }
 
     @GetMapping("/me")
@@ -45,42 +41,11 @@ public class StaffController {
         return ResponseEntity.ok(staffService.updateProfile(staff.getId(),staffProfile));
     }
 
-    @GetMapping("/complaint")
-    public ResponseEntity<List<Complaint>> getAllComplaints(){
-        return ResponseEntity.ok(complaintService.getAllComplaint());
+    @PostMapping("/update-profile/update-password")
+    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserPrincipal userPrincipal,@RequestParam String oldPassword, @RequestParam String newPassword){
+       staffService.updatePassword(userPrincipal.getId(),oldPassword,newPassword);
+       return ResponseEntity.ok("Password updated successfully!");
     }
 
-    @GetMapping("/complaint/{id}")
-    public ResponseEntity<Complaint> getComplaintById(@PathVariable String id){
-        Complaint complaint=complaintService.getComplaintById(id);
-        if(complaint==null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(complaint);
-    }
-
-    @GetMapping("/feedback")
-    public ResponseEntity<List<Feedback>> getAllFeedback(){
-        return ResponseEntity.ok(feedbackService.getAllFeedback());
-    }
-
-    @GetMapping("/feedback/{id}")
-    public ResponseEntity<Feedback> getFeedbackById(@PathVariable String id){
-        Feedback feedback=feedbackService.getFeedbackById(id);
-        if(feedback==null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(feedback);
-    }
-
-    @PutMapping("/complaint/{id}/resolve")
-    public ResponseEntity<Complaint> resolveComplaint(@PathVariable String id){
-        Complaint complaint=complaintService.getComplaintById(id);
-        if(complaint==null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(complaintService.resolveComplaint(id));
-    }
 
 }

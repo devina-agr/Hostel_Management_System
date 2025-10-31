@@ -8,9 +8,28 @@ import java.util.List;
 @Document(collection = "StaffProfile")
 public class StaffProfile {
 
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String userId;
     private String department;
     private String shift;
+    private HostelType hostelType;
+
+    public HostelType getHostelType() {
+        return hostelType;
+    }
+
+    public void setHostelType(HostelType hostelType) {
+        this.hostelType = hostelType;
+    }
 
     public String getUserId() {
         return userId;

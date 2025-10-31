@@ -1,8 +1,6 @@
 package org.spring.hostel_management_system.DTO;
 
-import org.spring.hostel_management_system.Model.HostelType;
-import org.spring.hostel_management_system.Model.Preference;
-import org.spring.hostel_management_system.Model.Role;
+import org.spring.hostel_management_system.Model.*;
 
 import java.util.Set;
 
@@ -21,19 +19,23 @@ public class StudentFullProfileDTO {
     private String parentContactNo;
     private Preference preference;
 
-    public StudentFullProfileDTO(String id, String name, String email,Set<Role> role, String contactNo, String branch, int year, String gender, HostelType hostelType, String roomId, String parentContactNo, Preference preference) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.role = role;
-        this.contactNo = contactNo;
-        this.branch = branch;
-        this.year = year;
-        this.gender = gender;
-        this.hostelType = hostelType;
-        this.roomId = roomId;
-        this.parentContactNo = parentContactNo;
-        this.preference = preference;
+
+    public StudentFullProfileDTO(User user, StudentProfile studentProfile) {
+        this.id= user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.role = user.getRole();
+        this.contactNo = user.getContactNo();
+        if(studentProfile!=null){
+            this.branch = studentProfile.getBranch();
+            this.year = studentProfile.getYear();
+            this.gender = studentProfile.getGender();
+            this.hostelType = studentProfile.getHostelType();
+            this.roomId = studentProfile.getRoomId();
+            this.parentContactNo = studentProfile.getParentContactNo();
+            this.preference = studentProfile.getPreference();
+        }
+
     }
 
     public String getId() {

@@ -15,14 +15,95 @@ public class Preference {
     private CleanlinessLevel cleanlinessLevel;
     private NoisePreference noisePreference;
     private StudyPreference studyPreference;
-    private SleepPattern sleepPattern;
+    private Allergy allergy;
     private Hobbies hobbies;
     private RoomTempPreference roomTempPreference;
     private RoomType roomType;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public ScheduleType getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
+    }
+
+    public CleanlinessLevel getCleanlinessLevel() {
+        return cleanlinessLevel;
+    }
+
+    public void setCleanlinessLevel(CleanlinessLevel cleanlinessLevel) {
+        this.cleanlinessLevel = cleanlinessLevel;
+    }
+
+    public NoisePreference getNoisePreference() {
+        return noisePreference;
+    }
+
+    public void setNoisePreference(NoisePreference noisePreference) {
+        this.noisePreference = noisePreference;
+    }
+
+    public StudyPreference getStudyPreference() {
+        return studyPreference;
+    }
+
+    public void setStudyPreference(StudyPreference studyPreference) {
+        this.studyPreference = studyPreference;
+    }
+
+    public Allergy getAllergy() {
+        return allergy;
+    }
+
+    public void setAllergy(Allergy allergy) {
+        this.allergy = allergy;
+    }
+
+    public Hobbies getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(Hobbies hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public RoomTempPreference getRoomTempPreference() {
+        return roomTempPreference;
+    }
+
+    public void setRoomTempPreference(RoomTempPreference roomTempPreference) {
+        this.roomTempPreference = roomTempPreference;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
     public enum ScheduleType{
         MORNING_PERSON,
-        NIGHT_PERSON
+        NIGHT_PERSON,
+        FLEXIBLE
     }
     public enum CleanlinessLevel{
         HIGH,
@@ -39,9 +120,10 @@ public class Preference {
         GROUP,
         FLEXIBLE
     }
-    public enum SleepPattern{
-        EARLY,
-        LATE
+    public enum Allergy{
+        DIRT,
+        PERFUME,
+        OTHERS
     }
     public enum Hobbies{
         MUSIC,
@@ -53,9 +135,10 @@ public class Preference {
         OTHERS
     }
     public enum RoomTempPreference{
+        CHILLED,
         COOL,
         NORMAL,
-        WARM
+        FLEXIBLE
     }
 
 

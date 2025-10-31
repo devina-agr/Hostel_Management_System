@@ -1,6 +1,8 @@
 package org.spring.hostel_management_system.DTO;
 
 import org.spring.hostel_management_system.Model.Role;
+import org.spring.hostel_management_system.Model.StaffProfile;
+import org.spring.hostel_management_system.Model.User;
 
 import java.util.Set;
 
@@ -13,6 +15,16 @@ public class StaffFullProfileDTO {
     private String contactNo;
     private String department;
     private String shift;
+
+    public StaffFullProfileDTO(User staff, StaffProfile staffProfile) {
+        this.id=staff.getId();
+        this.name=staff.getName();
+        this.email=staff.getEmail();
+        this.role=staff.getRole();
+        this.contactNo=staff.getContactNo();
+        this.department=staffProfile.getDepartment();
+        this.shift=staffProfile.getShift();
+    }
 
     public String getId() {
         return id;

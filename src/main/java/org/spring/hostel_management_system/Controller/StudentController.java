@@ -44,7 +44,8 @@ public class StudentController {
         }
         StudentProfile studentProfile=studentProfileService.getStudentByUserId(user.getId());
         if(studentProfile==null){
-            return ResponseEntity.notFound().build();
+           studentProfile=new StudentProfile();
+            studentProfile.setStudentId(user.getId());
         }
         if(profile.getBranch()!=null){
             studentProfile.setBranch(profile.getBranch());
@@ -61,7 +62,7 @@ public class StudentController {
         if(profile.getYear()!=0){
             studentProfile.setYear(profile.getYear());
         }
-        studentProfileService.updateProfile(studentProfile);
+        studentProfileService.updateProfile(user.getId(),studentProfile);
         StudentFullProfileDTO studentFullProfileDTO=studentService.getMyProfile(user.getId());
         return ResponseEntity.ok(studentFullProfileDTO);
     }
