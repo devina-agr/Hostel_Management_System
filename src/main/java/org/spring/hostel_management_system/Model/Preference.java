@@ -19,6 +19,7 @@ public class Preference {
     private RoomTempPreference roomTempPreference;
     private RoomType roomType;
 
+
     public String getId() {
         return id;
     }

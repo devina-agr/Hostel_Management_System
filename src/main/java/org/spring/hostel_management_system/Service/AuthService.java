@@ -51,7 +51,7 @@ public class AuthService {
         student.setName(request.getName());
         student.setContactNo(request.getContactNo());
         student.setPassword(passwordEncoder.encode(request.getPassword()));
-        student.setRole(Set.of(Role.STUDENT));
+        student.setRole(Set.of(Role.ROLE_STUDENT));
         userRepo.save(student);
         String token=jwtService.generateToken(student.getEmail(),student.getRole());
         return new AuthResponse(student.getEmail(),token,student.getRole());

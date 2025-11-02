@@ -1,12 +1,14 @@
 package org.spring.hostel_management_system.Model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 @Component
 @Document(collection = "StudentProfile")
 public class StudentProfile {
-
+    @Id
+    private String id;
     private String branch;
     private String studentId;
     private int year;
@@ -15,6 +17,14 @@ public class StudentProfile {
     private String roomId;
     private String parentContactNo;
     private Preference preference;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getStudentId() {
         return studentId;

@@ -1,5 +1,6 @@
 package org.spring.hostel_management_system.Service;
 
+import org.spring.hostel_management_system.Controller.WardenController;
 import org.spring.hostel_management_system.DTO.*;
 import org.spring.hostel_management_system.Model.*;
 import org.spring.hostel_management_system.Repository.StaffProfileRepo;
@@ -40,29 +41,29 @@ public class WardenService {
     }
 
     public List<StudentFullProfileDTO> getAllStudents() {
-        List<User> student=userRepo.findAll().stream().filter(user -> user.getRole().contains(Role.STUDENT)).toList();
+        List<User> student=userRepo.findAll().stream().filter(user -> user.getRole().contains(Role.ROLE_STUDENT)).toList();
 
         return student.stream().map(user -> {
-            Optional<StudentProfile> studentProfile=studentProfileRepo.findById(user.getId());
-            return studentProfile.map(profile-> studentMapper.toFullDTO(user,profile)).orElse(null);
+            StudentProfile studentProfile=studentProfileRepo.findByStudentId(user.getId()).orElse(null);
+            return  studentMapper.toFullDTO(user,studentProfile);
         }).toList();
 
     }
 
     public StudentFullProfileDTO getStudentById(String id) {
         User user =userRepo.findById(id).orElseThrow(()->new RuntimeException("User not found!"));
-        StudentProfile studentProfile=studentProfileRepo.findByStudentId(id).orElseThrow(()->new RuntimeException("Profile not found!"));
+        StudentProfile studentProfile=studentProfileRepo.findByStudentId(id).orElse(null);
         return studentMapper.toFullDTO(user,studentProfile);
     }
 
     public WardenFullProfileDTO addWarden(String id, WardenRegisterDTO warden) {
         User admin=userRepo.findById(id).orElseThrow(()->new RuntimeException("Warden not found!"));
-        if(admin.getRole().contains(Role.WARDEN)){
+            if(admin.getRole().contains(Role.ROLE_WARDEN)){
             String rawPassword=generateRandomPassword();
             User user=new User();
             user.setName(warden.getName());
             user.setEmail(warden.getEmail());
-            user.setRole(Set.of(Role.WARDEN));
+            user.setRole(Set.of(Role.ROLE_WARDEN));
             user.setPassword(passwordEncoder.encode(rawPassword));
             userRepo.save(user);
 
@@ -72,7 +73,7 @@ public class WardenService {
             wardenProfileRepo.save(wardenProfile);
 
             String subject="Your Hostel Management System Account";
-            String body="Hello" + warden.getName() +",\n\n"
+            String body="Hello " + warden.getName() +",\n\n"
                     +"Your warden account has been created successfully.\n"
                     +"Email: "+warden.getEmail()+"\n"
                     +"Temporary Password: " + rawPassword + "\n\n"
@@ -90,13 +91,13 @@ public class WardenService {
 
     public StaffFullProfileDTO addStaff(String id, StaffRegisterDTO staffRegisterDTO) {
         User user=userRepo.findById(id).orElseThrow(()->new RuntimeException("Warden not found!"));
-        if(user.getRole().contains(Role.WARDEN)){
+        if(user.getRole().contains(Role.ROLE_WARDEN)){
             String rawPassword=generateRandomPassword();
             User staff=new User();
             staff.setName(staffRegisterDTO.getName());
             staff.setEmail(staffRegisterDTO.getEmail());
             staff.setPassword(passwordEncoder.encode(rawPassword));
-            staff.setRole(Set.of(Role.STAFF));
+            staff.setRole(Set.of(Role.ROLE_STAFF));
             StaffProfile staffProfile=new StaffProfile();
             staffProfile.setHostelType(staffRegisterDTO.getHostelType());
             staffProfile.setDepartment(staffRegisterDTO.getDept());
@@ -160,12 +161,12 @@ public class WardenService {
         return new WardenFullProfileDTO(user,wardenProfile);
     }
 
-    public void updatePassword(String id, String oldPassword, String newPassword) {
+    public void updatePassword(String id, WardenController.PasswordUpdateRequest passwordUpdateRequest) {
         User user=userRepo.findById(id).orElseThrow(()->new RuntimeException("No user found!"));
-        if(!passwordEncoder.matches(oldPassword, user.getPassword())){
+        if(!passwordEncoder.matches(passwordUpdateRequest.getOldPassword(), user.getPassword())){
             throw new RuntimeException("Incorrect password!");
         }
-        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setPassword(passwordEncoder.encode(passwordUpdateRequest.getNewPassword()));
         userRepo.save(user);
     }
 }

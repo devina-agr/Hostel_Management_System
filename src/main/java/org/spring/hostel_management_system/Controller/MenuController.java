@@ -8,6 +8,7 @@ import org.spring.hostel_management_system.Service.MenuService;
 import org.spring.hostel_management_system.Service.StudentProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class MenuController {
         this.studentProfileService = studentProfileService;
     }
 
+    @GetMapping
     public ResponseEntity<List<Menu>> getMenu(@AuthenticationPrincipal UserPrincipal userPrincipal){
         StudentProfile studentProfile=studentProfileService.getStudentByUserId(userPrincipal.getId());
         if(studentProfile==null || studentProfile.getHostelType()==null){

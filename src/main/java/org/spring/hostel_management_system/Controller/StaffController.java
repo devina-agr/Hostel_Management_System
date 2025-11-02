@@ -1,6 +1,7 @@
 package org.spring.hostel_management_system.Controller;
 
 import org.spring.hostel_management_system.DTO.StaffFullProfileDTO;
+import org.spring.hostel_management_system.DTO.StaffProfileUpdateDTO;
 import org.spring.hostel_management_system.Model.*;
 import org.spring.hostel_management_system.Service.ComplaintService;
 import org.spring.hostel_management_system.Service.FeedbackService;
@@ -33,7 +34,7 @@ public class StaffController {
     }
 
     @PutMapping("/update-profile")
-    public ResponseEntity<StaffFullProfileDTO> updateProfile(@AuthenticationPrincipal UserPrincipal staff, @RequestBody StaffProfile staffProfile){
+    public ResponseEntity<StaffFullProfileDTO> updateProfile(@AuthenticationPrincipal UserPrincipal staff, @RequestBody StaffProfileUpdateDTO staffProfile){
         User user=staffService.getStaffById(staff.getId());
         if(user==null){
             return ResponseEntity.notFound().build();

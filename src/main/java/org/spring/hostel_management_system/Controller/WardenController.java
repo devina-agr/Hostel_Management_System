@@ -6,6 +6,7 @@ import org.spring.hostel_management_system.Repository.UserRepo;
 import org.spring.hostel_management_system.Service.ComplaintService;
 import org.spring.hostel_management_system.Service.FeedbackService;
 import org.spring.hostel_management_system.Service.WardenService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,7 +37,7 @@ public class WardenController {
         return ResponseEntity.ok(wardenService.getStudentById(id));
     }
 
-    @PostMapping("/register-warden")
+    @PostMapping(value="/register-warden",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WardenFullProfileDTO> addWarden(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody WardenRegisterDTO warden){
         WardenFullProfileDTO warden1 =wardenService.addWarden(userPrincipal.getId(), warden);
         return ResponseEntity.ok(warden1);
@@ -64,10 +65,30 @@ public class WardenController {
     }
 
     @PostMapping("/update-profile/update-password")
-    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam String oldPassword, @RequestParam String newPassword){
+    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserPrincipal userPrincipal,@RequestBody PasswordUpdateRequest passwordUpdateRequest){
 
-        wardenService.updatePassword(userPrincipal.getId(),oldPassword,newPassword);
+        wardenService.updatePassword(userPrincipal.getId(),passwordUpdateRequest);
         return ResponseEntity.ok("Password updated successfully!");
+    }
+    public static class PasswordUpdateRequest {
+        private String oldPassword;
+        private String newPassword;
+
+        public String getOldPassword() {
+            return oldPassword;
+        }
+
+        public void setOldPassword(String oldPassword) {
+            this.oldPassword = oldPassword;
+        }
+
+        public String getNewPassword() {
+            return newPassword;
+        }
+
+        public void setNewPassword(String newPassword) {
+            this.newPassword = newPassword;
+        }
     }
 
 }

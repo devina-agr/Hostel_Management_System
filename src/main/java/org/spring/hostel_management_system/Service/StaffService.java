@@ -1,6 +1,7 @@
 package org.spring.hostel_management_system.Service;
 
 import org.spring.hostel_management_system.DTO.StaffFullProfileDTO;
+import org.spring.hostel_management_system.DTO.StaffProfileUpdateDTO;
 import org.spring.hostel_management_system.Model.StaffProfile;
 import org.spring.hostel_management_system.Model.User;
 import org.spring.hostel_management_system.Repository.StaffProfileRepo;
@@ -30,7 +31,7 @@ public class StaffService {
         return userRepo.findById(id).orElseThrow(()->new RuntimeException("No user found!"));
     }
 
-    public StaffFullProfileDTO updateProfile(String id, StaffProfile staffProfile) {
+    public StaffFullProfileDTO updateProfile(String id, StaffProfileUpdateDTO staffProfile) {
         User user=userRepo.findById(id).orElseThrow(()->new RuntimeException("User not found!"));
         StaffProfile profile=staffProfileRepo.findByUserId(id);
         if(profile==null){
@@ -42,9 +43,6 @@ public class StaffService {
         }
         if(staffProfile.getHostelType()!=null){
             profile.setHostelType(staffProfile.getHostelType());
-        }
-        if(staffProfile.getDepartment()!=null){
-            profile.setDepartment(staffProfile.getDepartment());
         }
         profile.setUserId(id);
         staffProfileRepo.save(profile);
