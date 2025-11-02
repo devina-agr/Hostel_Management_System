@@ -43,8 +43,8 @@ public class StaffController {
     }
 
     @PostMapping("/update-profile/update-password")
-    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserPrincipal userPrincipal,@RequestParam String oldPassword, @RequestParam String newPassword){
-       staffService.updatePassword(userPrincipal.getId(),oldPassword,newPassword);
+    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody WardenController.PasswordUpdateRequest passwordUpdateRequest){
+       staffService.updatePassword(userPrincipal.getId(), passwordUpdateRequest.getOldPassword(), passwordUpdateRequest.getNewPassword());
        return ResponseEntity.ok("Password updated successfully!");
     }
 

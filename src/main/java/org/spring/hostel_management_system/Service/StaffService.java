@@ -38,6 +38,15 @@ public class StaffService {
             profile=new StaffProfile();
             profile.setUserId(id);
         }
+        if(staffProfile.getName()!=null){
+            user.setName(staffProfile.getName());
+        }
+        if(staffProfile.getEmail()!=null){
+            user.setEmail(staffProfile.getEmail()   );
+        }
+        if(staffProfile.getContactNo()!=null){
+            user.setContactNo(staffProfile.getContactNo());
+        }
         if(staffProfile.getShift()!=null){
             profile.setShift(staffProfile.getShift());
         }

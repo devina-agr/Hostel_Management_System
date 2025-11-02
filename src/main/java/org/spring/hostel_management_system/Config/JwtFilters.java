@@ -38,11 +38,6 @@ public class JwtFilters extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
-        System.out.println("Incoming path: "+ request.getServletPath());
-        System.out.println("Path: " + request.getServletPath());
-        System.out.println("Header: " + request.getHeader(HttpHeaders.AUTHORIZATION));
-        System.out.println("Authenticated user: " + SecurityContextHolder.getContext().getAuthentication());
-
 
         final String header=request.getHeader(HttpHeaders.AUTHORIZATION);
         if(header!=null &&  header.startsWith("Bearer ")){
@@ -65,8 +60,7 @@ public class JwtFilters extends OncePerRequestFilter {
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(auth);
-                    System.out.println("✅ Authenticated user set: " + email);
-                    System.out.println("Authenticated user: " + SecurityContextHolder.getContext().getAuthentication());
+
                 }
            }
            catch (Exception e){
