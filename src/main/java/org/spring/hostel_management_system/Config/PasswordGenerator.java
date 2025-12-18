@@ -10,4 +10,3 @@ public class PasswordGenerator {
         System.out.println(encoder.encode("fSb4eMpx"));
     }
 }
-

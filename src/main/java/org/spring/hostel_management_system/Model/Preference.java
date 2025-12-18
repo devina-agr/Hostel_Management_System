@@ -11,7 +11,6 @@ public class Preference {
 
     private String id;
     private String studentId;
-
     private ScheduleType scheduleType;
     private CleanlinessLevel cleanlinessLevel;
     private NoisePreference noisePreference;
@@ -19,7 +18,7 @@ public class Preference {
     private Allergy allergy;
     private RoomTempPreference roomTempPreference;
     private RoomType roomType;
-    private FoodPreference foodPreference;
+
 
 
     public String getId() {
@@ -93,14 +92,6 @@ public class Preference {
         this.roomType = roomType;
     }
 
-    public FoodPreference getFoodPreference() {
-        return foodPreference;
-    }
-
-    public void setFoodPreference(FoodPreference foodPreference) {
-        this.foodPreference = foodPreference;
-    }
-
     public enum ScheduleType{
         MORNING_PERSON,
         NIGHT_PERSON,
@@ -133,11 +124,7 @@ public class Preference {
         NORMAL,
         FLEXIBLE
     }
-    public enum FoodPreference{
-        VEGETARIAN,
-        NON_VEGETARIAN,
-        FLEXIBLE
-    }
+
 
 
 

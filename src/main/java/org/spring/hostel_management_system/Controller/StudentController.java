@@ -11,7 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/student")
+@RequestMapping("/api/student")
 @PreAuthorize("hasRole('STUDENT')")
 public class StudentController {
 
@@ -25,14 +25,6 @@ public class StudentController {
 
     @GetMapping("/profile")
     public ResponseEntity<StudentFullProfileDTO> getMyProfile(@AuthenticationPrincipal UserPrincipal user){
-        User student=studentService.getStudentById(user.getId());
-        if(student==null){
-            return ResponseEntity.notFound().build();
-        }
-        StudentProfile studentProfile=studentProfileService.getStudentByUserId(user.getId());
-        if(studentProfile==null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(studentService.getMyProfile(user.getId()));
     }
 

@@ -3,7 +3,6 @@ package org.spring.hostel_management_system.Config;
 import org.spring.hostel_management_system.Service.MyUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 @EnableMethodSecurity
@@ -23,50 +22,60 @@ public class SecurityConfig {
 
     private final JwtFilters jwtFilters;
     private final MyUserDetailService myUserDetailService;
+    private final CorsConfigurationSource corsConfigurationSource;
 
-    public SecurityConfig(JwtFilters jwtFilters, MyUserDetailService myUserDetailService) {
+    public SecurityConfig(
+            JwtFilters jwtFilters,
+            MyUserDetailService myUserDetailService,
+            CorsConfigurationSource corsConfigurationSource
+    ) {
         this.jwtFilters = jwtFilters;
         this.myUserDetailService = myUserDetailService;
+        this.corsConfigurationSource = corsConfigurationSource;
     }
 
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception{
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-            http.csrf(customizer->customizer.disable())
-                    .sessionManagement((s)->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authorizeHttpRequests(auth->auth
-                            .requestMatchers("/api/auth/login","/api/auth/register").permitAll()
-                            .requestMatchers("/api/staff/**").hasAuthority("ROLE_STAFF")
-                            .requestMatchers("/api/warden/**").hasAuthority("ROLE_WARDEN")
-                            .requestMatchers("/api/student/**").hasAuthority("ROLE_STUDENT")
-                            .anyRequest().authenticated()
-                    );
-            http
-                    .authenticationProvider(daoAuthenticationProvider())
-                    .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class);
-            return http.build();
-        }
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(s ->
+                        s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/error"
+                        ).permitAll()
+                        .requestMatchers("/api/warden/**").hasAuthority("ROLE_WARDEN")
+                        .requestMatchers("/api/staff/**").hasAuthority("ROLE_STAFF")
+                        .requestMatchers("/api/student/**").hasAuthority("ROLE_STUDENT")
+                        .anyRequest().authenticated()
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(myUserDetailService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(myUserDetailService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-
-        return daoAuthenticationProvider;
-    }
-
-
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration config
+    ) throws Exception {
         return config.getAuthenticationManager();
     }
-
-
 }

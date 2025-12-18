@@ -2,7 +2,8 @@ package org.spring.hostel_management_system.DTO;
 
 import org.spring.hostel_management_system.Model.HostelType;
 
-public class StaffRegisterDTO {
+public class
+StaffRegisterDTO {
 
     private String name;
     private String email;

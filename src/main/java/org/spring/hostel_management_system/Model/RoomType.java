@@ -8,7 +8,7 @@ public enum RoomType {
     TWO(2, HostelType.GIRLS_HOSTEL, HostelType.BOYS_HOSTEL),
     THREE(3, HostelType.GIRLS_HOSTEL, HostelType.BOYS_HOSTEL),
     FOUR(4, HostelType.BOYS_HOSTEL),
-    SIX(6, HostelType.BOYS_HOSTEL);
+    FIVE(5, HostelType.BOYS_HOSTEL);
 
     private final int value;
     private final List<HostelType> hostelType;

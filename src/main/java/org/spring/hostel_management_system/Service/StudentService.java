@@ -21,8 +21,32 @@ public class StudentService {
 
     public StudentFullProfileDTO getMyProfile(String id) {
         User user=userRepo.findById(id).orElseThrow(()->new RuntimeException("User not found!"));
-        StudentProfile studentProfile=studentProfileRepo.findByStudentId(id).orElse(null);
-        return new StudentFullProfileDTO(user, studentProfile);
+        StudentProfile profile=studentProfileRepo.findByStudentId(id).orElse(null);
+        StudentFullProfileDTO dto = new StudentFullProfileDTO();
+
+        // basic user info
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setContactNo(user.getContactNo());
+
+        // profile info (may be null)
+        if (profile != null) {
+            dto.setBranch(profile.getBranch());
+            dto.setYear(profile.getYear());
+            dto.setGender(profile.getGender());
+            dto.setHostelType(profile.getHostelType());
+            dto.setParentContactNo(profile.getParentContactNo());
+        }
+        boolean complete =
+                profile != null &&
+                        profile.getBranch() != null &&
+                        profile.getYear() > 0 &&
+                        profile.getGender() != null &&
+                        profile.getHostelType() != null &&
+                        profile.getParentContactNo() != null;
+
+        dto.setProfileComplete(complete);
+        return dto;
     }
 
 

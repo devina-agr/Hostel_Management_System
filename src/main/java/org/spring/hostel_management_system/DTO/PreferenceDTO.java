@@ -13,10 +13,11 @@ public class PreferenceDTO {
     private Preference.RoomTempPreference roomTempPreference;
     private RoomType roomType;
 
+    public PreferenceDTO() {}
+
     public Preference.ScheduleType getScheduleType() {
         return scheduleType;
     }
-
     public void setScheduleType(Preference.ScheduleType scheduleType) {
         this.scheduleType = scheduleType;
     }
@@ -24,7 +25,6 @@ public class PreferenceDTO {
     public Preference.CleanlinessLevel getCleanlinessLevel() {
         return cleanlinessLevel;
     }
-
     public void setCleanlinessLevel(Preference.CleanlinessLevel cleanlinessLevel) {
         this.cleanlinessLevel = cleanlinessLevel;
     }
@@ -32,7 +32,6 @@ public class PreferenceDTO {
     public Preference.NoisePreference getNoisePreference() {
         return noisePreference;
     }
-
     public void setNoisePreference(Preference.NoisePreference noisePreference) {
         this.noisePreference = noisePreference;
     }
@@ -40,7 +39,6 @@ public class PreferenceDTO {
     public Preference.StudyPreference getStudyPreference() {
         return studyPreference;
     }
-
     public void setStudyPreference(Preference.StudyPreference studyPreference) {
         this.studyPreference = studyPreference;
     }
@@ -48,7 +46,6 @@ public class PreferenceDTO {
     public Preference.Allergy getAllergy() {
         return allergy;
     }
-
     public void setAllergy(Preference.Allergy allergy) {
         this.allergy = allergy;
     }
@@ -56,7 +53,6 @@ public class PreferenceDTO {
     public Preference.RoomTempPreference getRoomTempPreference() {
         return roomTempPreference;
     }
-
     public void setRoomTempPreference(Preference.RoomTempPreference roomTempPreference) {
         this.roomTempPreference = roomTempPreference;
     }
@@ -64,49 +60,7 @@ public class PreferenceDTO {
     public RoomType getRoomType() {
         return roomType;
     }
-
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
-    }
-
-    public enum ScheduleType{
-        MORNING_PERSON,
-        NIGHT_PERSON,
-        FLEXIBLE
-    }
-    public enum CleanlinessLevel{
-        HIGH,
-        MEDIUM,
-        LOW
-    }
-    public enum NoisePreference{
-        QUIET,
-        OKAY,
-        NOISY
-    }
-    public enum StudyPreference{
-        ALONE,
-        GROUP,
-        FLEXIBLE
-    }
-    public enum Allergy{
-        DIRT,
-        PERFUME,
-        OTHERS
-    }
-    public enum Hobbies{
-        MUSIC,
-        CODING,
-        DANCE,
-        ART,
-        READING,
-        OUTDOOR_GAMES,
-        OTHERS
-    }
-    public enum RoomTempPreference{
-        CHILLED,
-        COOL,
-        NORMAL,
-        FLEXIBLE
     }
 }

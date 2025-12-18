@@ -43,7 +43,7 @@ public class RoomController {
 //        }
 //    }
 
-    @PostMapping("/release")
+    @PostMapping("/release/{roomId}")
     public ResponseEntity<String> releaseRoom(@PathVariable String roomId){
         roomService.releaseRoom(roomId);
         return ResponseEntity.ok("Room released successfully!");

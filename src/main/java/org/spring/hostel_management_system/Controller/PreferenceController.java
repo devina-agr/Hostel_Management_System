@@ -41,16 +41,22 @@ public class PreferenceController {
     }
 
     @PostMapping
-    public ResponseEntity<Preference> submitPreference(@AuthenticationPrincipal UserPrincipal user, @RequestBody PreferenceDTO preferenceDTO){
-        if(preferenceService.hasSubmitted(user.getId())){
-            return ResponseEntity.badRequest().body(null);
-        }
-        StudentProfile studentProfile =studentProfileService.getStudentByUserId(user.getId());
-        if(studentProfile.getHostelType()==null){
+    public ResponseEntity<Preference> submitPreference(
+            @AuthenticationPrincipal UserPrincipal user,
+            @RequestBody PreferenceDTO preferenceDTO
+    ){
+        System.out.println("USER ID: " + user.getId());
+        System.out.println("DTO: " + preferenceDTO);
+
+        StudentProfile studentProfile = studentProfileService.getStudentByUserId(user.getId());
+        if(studentProfile == null){
+            System.out.println("❌ Student profile not found");
             return ResponseEntity.badRequest().build();
         }
+
         return ResponseEntity.ok(preferenceService.savePreference(user.getId(), preferenceDTO));
     }
+
 
     @GetMapping("/my-preference")
     public ResponseEntity<Preference> getMyPreference(@AuthenticationPrincipal UserPrincipal user){

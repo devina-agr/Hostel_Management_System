@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Feedback {
 
     private String id;
-    private String studentId;
+        private String studentId;
     private String comment;
     private int rating;
 

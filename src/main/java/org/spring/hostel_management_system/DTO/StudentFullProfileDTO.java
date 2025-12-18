@@ -18,24 +18,27 @@ public class StudentFullProfileDTO {
     private String roomId;
     private String parentContactNo;
     private Preference preference;
+    private boolean profileComplete=false;
 
+    public StudentFullProfileDTO() {
 
-    public StudentFullProfileDTO(User user, StudentProfile studentProfile) {
-        this.id= user.getId();
+    }
+
+    public StudentFullProfileDTO(User user, StudentProfile profile) {
+        this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.role = user.getRole();
         this.contactNo = user.getContactNo();
-        if(studentProfile!=null){
-            this.branch = studentProfile.getBranch();
-            this.year = studentProfile.getYear();
-            this.gender = studentProfile.getGender();
-            this.hostelType = studentProfile.getHostelType();
-            this.roomId = studentProfile.getRoomId();
-            this.parentContactNo = studentProfile.getParentContactNo();
-            this.preference = studentProfile.getPreference();
-        }
 
+        if (profile != null) {
+            this.branch = profile.getBranch();
+            this.year = profile.getYear();
+            this.gender = profile.getGender();
+            this.hostelType = profile.getHostelType();
+            this.roomId = profile.getRoomId();
+            this.parentContactNo = profile.getParentContactNo();
+            this.preference = profile.getPreference();
+        }
     }
 
     public String getId() {
@@ -131,5 +134,13 @@ public class StudentFullProfileDTO {
 
     public void setPreference(Preference preference) {
         this.preference = preference;
+    }
+
+    public boolean isProfileComplete() {
+        return profileComplete;
+    }
+
+    public void setProfileComplete(boolean profileComplete) {
+        this.profileComplete = profileComplete;
     }
 }
